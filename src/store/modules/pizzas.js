@@ -2,8 +2,7 @@ import axios from "axios";
 
 export const pizzas = {
   state: {
-    pizzas: [
-    ],
+    pizzas: [],
   },
   getters: {
     pizzaList(state) {
@@ -15,7 +14,7 @@ export const pizzas = {
       state.pizzas = pizzas;
     },
     increaseQuantity(state, pizzaId) {
-      const pizza = state.pizzas.find(p => p.id === pizzaId);
+      const pizza = state.pizzas.find((p) => p.id === pizzaId);
       if (pizza) {
         pizza.quantity++;
       }

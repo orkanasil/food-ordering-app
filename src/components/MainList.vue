@@ -3,7 +3,7 @@
         <div class="pb-8">
             <h2>Meaty Pizzas</h2>
             <PizzaList class="shadow-2xl" v-for="pizza in meatyPizzas" :key="pizza.id" :pizza="pizza"
-                @increment="increaseQuantity(pizza.id)" />
+                @increment="increment(pizza.id)" />
         </div>
         <div class="pb-8">
             <h2>Vegetarian Pizzas</h2>
@@ -29,7 +29,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['increaseQuantity'])
+        ...mapActions(['increment'])
     }
 
 }
