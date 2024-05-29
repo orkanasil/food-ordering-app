@@ -2,7 +2,7 @@
     <button :type="type" :class="{
         primary: variant === 'primary',
         secondary: variant === 'secondary',
-        rounded: variant === 'rounded'
+        rounded: variant === 'rounded',
         link: variant === 'link',
     }" class="flex justify-center items-center">
         <slot></slot>

@@ -17,7 +17,7 @@ export const pizzas = {
       return state.selectedPizza;
     },
     getBasketCount(state) {
-      return state.getBasketCount.length;
+      return state.basketList.length;
     },
   },
   mutations: {
@@ -53,8 +53,7 @@ export const pizzas = {
       axios
         .get("pizzas")
         .then((response) => {
-          let pizzas = response.data;
-          commit("setPizzas", pizzas);
+          commit("setPizzas", response.data);
         })
         .catch((error) => {
           console.log(error);
