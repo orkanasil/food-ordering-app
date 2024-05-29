@@ -23,7 +23,7 @@ export const pizzas = {
   actions: {
     loadPizzas({ commit }) {
       axios
-        .get("http://localhost:3000/pizzas")
+        .get("pizzas")
         .then((response) => {
           let pizzas = response.data;
           commit("setPizzas", pizzas);
