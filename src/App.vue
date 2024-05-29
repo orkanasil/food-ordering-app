@@ -1,14 +1,11 @@
 <template>
-  <food-app />
+  <router-view />
 </template>
 
 <script>
-import FoodApp from "./views/FoodApp.vue"
+
 
 export default {
-  components: {
-    FoodApp
-  }
 }
 </script>
 

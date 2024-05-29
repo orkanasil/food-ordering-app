@@ -1,3 +1,5 @@
-import axios from "axios";
+import Obutton from "../components/ui/CustomButton.vue";
 
-axios.defaults.baseURL = "http://localhost:3000";
+export default function intallGlobalComponents(app) {
+  app.component("Obutton", Obutton);
+}

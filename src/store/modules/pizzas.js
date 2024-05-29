@@ -3,6 +3,8 @@ import axios from "axios";
 export const pizzas = {
   state: {
     pizzas: [],
+    basketList: [],
+    selectedPizza: null,
   },
   getters: {
     pizzaList(state) {
