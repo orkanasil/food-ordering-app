@@ -5,6 +5,8 @@ export const pizzas = {
     pizzas: [],
     basketList: [],
     selectedPizza: null,
+    tempPizas: [],
+    activeKey: "all",
   },
   getters: {
     pizzaList(state) {
@@ -19,10 +21,14 @@ export const pizzas = {
     getBasketCount(state) {
       return state.basketList.length;
     },
+    getActiveKey(state) {
+      return state.activeKey;
+    },
   },
   mutations: {
     setPizzas(state, pizzas) {
       state.pizzas = pizzas;
+      state.tempPizas = pizzas;
     },
     increaseQuantity(state, pizzaId) {
       state.pizzas?.map((pizza) => {
@@ -47,6 +53,19 @@ export const pizzas = {
     setPizzaById(state, id) {
       state.selectedPizza = state.pizzas.find((p) => p.id === id);
     },
+    filterPizzas(state, value) {
+      state.pizzas = state.tempPizas
+      if (value === "all") {
+        state.pizzas = state.tempPizas;
+        state.activeKey = "all";
+      } else if (value === "vegetarian") {
+        state.pizzas = state.pizzas?.filter((pizza) => pizza.veg);
+        state.activeKey = "vegetarian";
+      } else {
+        state.pizzas = state.pizzas?.filter((pizza) => !pizza.veg);
+        state.activeKey = "meaty";
+      }
+    },
   },
   actions: {
     loadPizzas({ commit }) {
@@ -68,8 +87,11 @@ export const pizzas = {
     addToBasket({ commit }, pizza) {
       commit("setBasketList", pizza);
     },
-    getPizzaById([commit], id) {
+    getPizzaById({ commit }, id) {
       commit("setPizzaById", id);
+    },
+    filterPizza({ commit }, value) {
+      commit("filterPizzas", value);
     },
   },
 };
