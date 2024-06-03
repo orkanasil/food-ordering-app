@@ -45,8 +45,8 @@ export const pizzas = {
       });
     },
     setBasketList(state, pizza) {
-      const isExist = state.basket.find((p) => p.id === pizza.id);
-      if (!isExist) {
+      const isExist = state.basketList.find((p) => p.id === pizza.id);
+      if (!isExist && pizza.quantity > 0) {
         state.basketList.push(pizza);
       }
     },
@@ -54,7 +54,7 @@ export const pizzas = {
       state.selectedPizza = state.pizzas.find((p) => p.id === id);
     },
     filterPizzas(state, value) {
-      state.pizzas = state.tempPizas
+      state.pizzas = state.tempPizas;
       if (value === "all") {
         state.pizzas = state.tempPizas;
         state.activeKey = "all";
@@ -64,6 +64,14 @@ export const pizzas = {
       } else {
         state.pizzas = state.pizzas?.filter((pizza) => !pizza.veg);
         state.activeKey = "meaty";
+      }
+    },
+    filterByName(state, name) {
+      state.pizzas = state.tempPizas;
+      if (name.length > 0) {
+        state.pizzas = state.pizzas?.filter(
+          (pizza) => pizza.name.toLowerCase() === name.toLowerCase(),
+        );
       }
     },
   },
@@ -92,6 +100,9 @@ export const pizzas = {
     },
     filterPizza({ commit }, value) {
       commit("filterPizzas", value);
+    },
+    filterByName({ commit }, name) {
+      commit("filterByName", name);
     },
   },
 };
