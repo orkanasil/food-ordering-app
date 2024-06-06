@@ -6,6 +6,7 @@ export const pizzas = {
     basketList: [],
     selectedPizza: [],
     tempPizas: [],
+    totalPrice: 0,
     activeKey: "all",
   },
   getters: {
@@ -23,6 +24,9 @@ export const pizzas = {
     },
     getActiveKey(state) {
       return state.activeKey;
+    },
+    getTotalPrice(state) {
+      return state.totalPrice;
     },
   },
   mutations: {
@@ -50,6 +54,24 @@ export const pizzas = {
         state.basketList.push(pizza);
       }
     },
+    deletePizzaFromBasket(state, pizzaId) {
+      const pizzaToRemove = state.basketList.find(
+        (pizza) => pizza.id === pizzaId,
+      );
+      if (pizzaToRemove) {
+        state.totalPrice -= pizzaToRemove.price * pizzaToRemove.quantity;
+        state.basketList = state.basketList.filter(
+          (pizza) => pizza.id !== pizzaId,
+        );
+      }
+    },
+    setTotalPrice(state) {
+      let total = 0;
+      state.basketList.forEach((pizza) => {
+        total += pizza.price * pizza.quantity;
+      });
+      state.totalPrice = total;
+    },
     setPizzaById(state, id) {
       state.selectedPizza = state.pizzas.find((p) => p.id === id);
     },
@@ -66,10 +88,6 @@ export const pizzas = {
         state.activeKey = "meaty";
       }
     },
-    resetPizzaFilter(state) {
-      state.pizzas = state.tempPizas;
-      state.activeKey = "all";
-    },
     filterByName(state, name) {
       state.pizzas = state.tempPizas;
       if (name.length > 0) {
@@ -77,6 +95,10 @@ export const pizzas = {
           (pizza) => pizza.name.toLowerCase() === name.toLowerCase(),
         );
       }
+    },
+    resetPizzaFilter(state) {
+      state.pizzas = state.tempPizas;
+      state.activeKey = "all";
     },
   },
   actions: {
@@ -108,8 +130,14 @@ export const pizzas = {
     filterByName({ commit }, name) {
       commit("filterByName", name);
     },
-    resetFilter({commit}) {
-      commit("resetPizzaFilter")
-    }
+    resetFilter({ commit }) {
+      commit("resetPizzaFilter");
+    },
+    getTotalAmount({ commit }) {
+      commit("setTotalPrice");
+    },
+    deletePizza({ commit }, pizzaId) {
+      commit("deletePizzaFromBasket", pizzaId);
+    },
   },
 };

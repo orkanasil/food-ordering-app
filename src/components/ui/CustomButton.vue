@@ -7,6 +7,7 @@
       rounded: variant === 'rounded',
       link: variant === 'link',
       close: variant === 'close',
+      delete: variant === 'delete',
     }"
     class="flex items-center justify-center"
   >
@@ -25,9 +26,14 @@ export default {
       type: String,
       default: "primary",
       validator(value, props) {
-        return ["primary", "secondary", "rounded", "link", "close"].includes(
-          value,
-        );
+        return [
+          "primary",
+          "secondary",
+          "rounded",
+          "link",
+          "close",
+          "delete",
+        ].includes(value);
       },
     },
   },
@@ -66,5 +72,10 @@ export default {
 .close {
   background-color: white;
   border: none;
+}
+.delete {
+  background-color: rgb(252, 121, 121);
+  padding: 16px;
+  border-radius: 8px;
 }
 </style>

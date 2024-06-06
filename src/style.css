@@ -3,18 +3,9 @@
 @import 'tailwindcss/utilities';
 
 @layer components {
-    .card {
-        display: flex;
-        height: 12rem;
-        width: 64rem;
-        margin-left:5rem;
-        margin-top: 2rem;
-        border-radius: 24px;
+    .title {
+        font-family: "Dancing Script", cursive;
+        font-weight: 400;
+        font-size: 36px;
     }
-    .image {
-        margin-left: auto;
-        border-top-right-radius: 10%;
-        border-bottom-right-radius: 10%;
-    }
-
 }

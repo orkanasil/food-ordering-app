@@ -1,13 +1,13 @@
 <template>
   <div class="h-24 bg-orange-500 px-20">
     <div class="flex h-full items-center justify-between">
-      <div @click="$router.push('/')" class="cursor-pointer text-2xl">
+      <div @click="$router.push('/')" class="title cursor-pointer">
         Yummy Pizzas
       </div>
       <div
         class="grid grid-cols-1 grid-rows-1 justify-items-end gap-4 md:grid-cols-2"
       >
-        <OButton @click="$router.push('/basket')" variant="link">
+        <OButton @click="pushBasket()" variant="link">
           Your Basket
           {{ getBasketCount ? `(${getBasketCount})` : "" }}
         </OButton>
@@ -38,13 +38,22 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getBasketCount"]),
+    ...mapGetters(["getBasketCount", "basketList"]),
   },
   methods: {
     ...mapActions(["filterByName"]),
     searchPizzas() {
       this.filterByName(this.inputText);
       this.inputText = "";
+    },
+    pushBasket() {
+      if (this.basketList.length > 0) {
+        this.$router.push({
+          name: "Basket",
+        });
+      } else {
+        alert("Your have to add items to your basket before you proceed!!!");
+      }
     },
   },
 };
