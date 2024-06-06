@@ -4,7 +4,7 @@ export const pizzas = {
   state: {
     pizzas: [],
     basketList: [],
-    selectedPizza: null,
+    selectedPizza: [],
     tempPizas: [],
     activeKey: "all",
   },
@@ -66,6 +66,10 @@ export const pizzas = {
         state.activeKey = "meaty";
       }
     },
+    resetPizzaFilter(state) {
+      state.pizzas = state.tempPizas;
+      state.activeKey = "all";
+    },
     filterByName(state, name) {
       state.pizzas = state.tempPizas;
       if (name.length > 0) {
@@ -104,5 +108,8 @@ export const pizzas = {
     filterByName({ commit }, name) {
       commit("filterByName", name);
     },
+    resetFilter({commit}) {
+      commit("resetPizzaFilter")
+    }
   },
 };

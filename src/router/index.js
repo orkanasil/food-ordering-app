@@ -7,7 +7,7 @@ import Basket from "../views/Basket/Basket.vue";
 
 const routes = [
   {
-    path: '',
+    path: "",
     component: DefaultLayout,
     children: [
       {

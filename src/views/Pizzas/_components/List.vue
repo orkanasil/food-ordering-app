@@ -18,10 +18,12 @@
 
 <script>
 import ListItem from "./ListItem.vue";
+import PizzaDetail from "../../PizzaDetail/PizzaDetail.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
     ListItem,
+    PizzaDetail,
   },
   computed: {
     ...mapGetters(["pizzaList"]),
