@@ -11,7 +11,7 @@
           Your Basket
           {{ getBasketCount ? `(${getBasketCount})` : "" }}
         </OButton>
-        <div class="hidden items-center justify-end md:flex">
+        <div class="hidden items-center justify-end lg:flex">
           <form @submit="searchPizzas(inputText)" class="flex">
             <input
               class="mr-2 rounded-lg px-10 py-2"

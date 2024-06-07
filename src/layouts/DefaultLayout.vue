@@ -1,16 +1,18 @@
 <template>
-  <div class="h-screen">
+  <div class="flex h-screen flex-col">
     <Navbar class="fixed left-0 right-0 top-0 z-50 shadow-md" />
-    <div class="container relative top-24 mx-auto mt-5">
-      <div
-        :class="showSidebar ? 'gap-10 md:grid-cols-5' : 'md:grid-cols-4'"
-        class="grid grid-cols-1"
-      >
-        <div v-if="showSidebar" class="md:col-span-1">
-          <SideBar />
-        </div>
-        <div class="md:col-span-4">
-          <RouterView />
+    <div class="flex flex-grow items-center justify-center">
+      <div class="container relative top-36 mx-auto mb-auto">
+        <div
+          :class="showSidebar ? 'gap-10 lg:grid-cols-5' : 'lg:grid-cols-6'"
+          class="grid grid-cols-1"
+        >
+          <div v-if="showSidebar" class="lg:col-span-1">
+            <SideBar />
+          </div>
+          <div :class="showSidebar ? 'lg:col-span-4' : 'lg:col-span-6'">
+            <RouterView />
+          </div>
         </div>
       </div>
     </div>

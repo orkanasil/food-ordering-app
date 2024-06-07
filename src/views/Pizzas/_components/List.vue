@@ -5,7 +5,6 @@
       <ListItem
         v-for="pizza in element.pizzas"
         :key="pizza.id"
-        class="shadow-2xl"
         :pizza="pizza"
         @see-detail="seeDetail(pizza.id)"
         @increment="increment(pizza.id)"
