@@ -65,6 +65,9 @@ export const pizzas = {
         );
       }
     },
+    resetBasketList(state) {
+      state.basketList = [];
+    },
     setTotalPrice(state) {
       let total = 0;
       state.basketList.forEach((pizza) => {
@@ -138,6 +141,9 @@ export const pizzas = {
     },
     deletePizza({ commit }, pizzaId) {
       commit("deletePizzaFromBasket", pizzaId);
+    },
+    resetBasket({ commit }) {
+      commit("resetBasketList");
     },
   },
 };
