@@ -28,15 +28,39 @@
     <img
       class="rounded-md border sm:h-48 sm:w-3/4 md:h-16 md:w-auto lg:h-24 xl:h-36"
       :src="pizza.img"
-      alt="Pizza Pictures"
+      :alt="pizza.name"
+      @click.stop="toggleModal"
     />
   </div>
+  <ImageModal
+    v-if="isSownModal"
+    @close="toggleModal"
+    :src="pizza.img"
+    :alt="pizza.name"
+  />
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+import ImageModal from "./ImageModal.vue";
+
 export default {
   props: ["pizza"],
+  data() {
+    return {
+      isSownModal: false,
+    };
+  },
+  components: {
+    ImageModal,
+  },
+  computed: {
+    ...mapGetters(["getModal"]),
+  },
+  methods: {
+    toggleModal() {
+      this.isSownModal = !this.isSownModal;
+    },
+  },
 };
 </script>
-
-<style scoped></style>

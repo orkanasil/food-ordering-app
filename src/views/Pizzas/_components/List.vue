@@ -25,7 +25,7 @@ export default {
     PizzaDetail,
   },
   computed: {
-    ...mapGetters(["pizzaList"]),
+    ...mapGetters(["pizzaList", "getModal"]),
     vegetarianPizzas() {
       return this.pizzaList.filter((pizza) => pizza.veg);
     },

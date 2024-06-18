@@ -40,31 +40,33 @@
                 class="aspect-h-4 aspect-w-2 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5"
               >
                 <img
-                  :src="selectedPizza.img"
+                  :src="selectedPizza?.img"
                   alt="Pizza Photo"
                   class="object-cover object-center md:h-64"
                 />
               </div>
               <div class="sm:col-span-8 lg:col-span-7">
                 <h2 class="text-2xl font-bold text-gray-900 sm:pr-12">
-                  {{ selectedPizza.name }}
+                  {{ selectedPizza?.name }}
                 </h2>
                 <p class="my-4">
                   Price :
-                  {{ (selectedPizza.quantity ?? 1) * selectedPizza.price }} $
+                  {{ (selectedPizza?.quantity ?? 1) * selectedPizza?.price }} $
                 </p>
-                <p class="my-4">Description: {{ selectedPizza.description }}</p>
+                <p class="my-4">
+                  Description: {{ selectedPizza?.description }}
+                </p>
                 <div class="my-4 flex justify-start gap-2">
                   <OButton
                     variant="rounded"
-                    @click.stop="decrement(selectedPizza.id)"
+                    @click.stop="decrement(selectedPizza?.id)"
                   >
                     <span class="material-symbols-outlined">remove</span>
                   </OButton>
-                  <p>{{ selectedPizza.quantity }}</p>
+                  <p>{{ selectedPizza?.quantity }}</p>
                   <OButton
                     variant="rounded"
-                    @click.stop="increment(selectedPizza.id)"
+                    @click.stop="increment(selectedPizza?.id)"
                   >
                     <span class="material-symbols-outlined">add</span>
                   </OButton>

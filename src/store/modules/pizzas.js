@@ -3,30 +3,19 @@ import axios from "axios";
 export const pizzas = {
   state: {
     pizzas: [],
-    basketList: [],
-    selectedPizza: [],
+    selectedPizza: null,
     tempPizas: [],
-    totalPrice: 0,
     activeKey: "all",
   },
   getters: {
     pizzaList(state) {
       return state.pizzas;
     },
-    basketList(state) {
-      return state.basketList;
-    },
     selectedPizza(state) {
       return state.selectedPizza;
     },
-    getBasketCount(state) {
-      return state.basketList.length;
-    },
     getActiveKey(state) {
       return state.activeKey;
-    },
-    getTotalPrice(state) {
-      return state.totalPrice;
     },
   },
   mutations: {
@@ -47,33 +36,6 @@ export const pizzas = {
           pizza.quantity--;
         }
       });
-    },
-    setBasketList(state, pizza) {
-      const isExist = state.basketList.find((p) => p.id === pizza.id);
-      if (!isExist && pizza.quantity > 0) {
-        state.basketList.push(pizza);
-      }
-    },
-    deletePizzaFromBasket(state, pizzaId) {
-      const pizzaToRemove = state.basketList.find(
-        (pizza) => pizza.id === pizzaId,
-      );
-      if (pizzaToRemove) {
-        state.totalPrice -= pizzaToRemove.price * pizzaToRemove.quantity;
-        state.basketList = state.basketList.filter(
-          (pizza) => pizza.id !== pizzaId,
-        );
-      }
-    },
-    resetBasketList(state) {
-      state.basketList = [];
-    },
-    setTotalPrice(state) {
-      let total = 0;
-      state.basketList.forEach((pizza) => {
-        total += pizza.price * pizza.quantity;
-      });
-      state.totalPrice = total;
     },
     setPizzaById(state, id) {
       state.selectedPizza = state.pizzas.find((p) => p.id === id);
@@ -121,9 +83,6 @@ export const pizzas = {
     decrement({ commit }, pizzaId) {
       commit("decreaseQuantity", pizzaId);
     },
-    addToBasket({ commit }, pizza) {
-      commit("setBasketList", pizza);
-    },
     getPizzaById({ commit }, id) {
       commit("setPizzaById", id);
     },
@@ -135,15 +94,6 @@ export const pizzas = {
     },
     resetFilter({ commit }) {
       commit("resetPizzaFilter");
-    },
-    getTotalAmount({ commit }) {
-      commit("setTotalPrice");
-    },
-    deletePizza({ commit }, pizzaId) {
-      commit("deletePizzaFromBasket", pizzaId);
-    },
-    resetBasket({ commit }) {
-      commit("resetBasketList");
     },
   },
 };
